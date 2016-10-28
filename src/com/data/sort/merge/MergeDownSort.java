@@ -1,34 +1,36 @@
-package com.data.sort;
+package com.data.sort.merge;
 
 /**
  * User: zhy
  * Date: 2016-10-19
  */
-public class MergeSort {
+public class MergeDownSort {
 
     private static Comparable[] auk;
 
-    public static void merge(Comparable[] array, int low, int mid, int high){
-        int i = low;
-        int j = mid + 1;
-        for (int k = low; k <= high; k++){
-            auk[k] = array[k];
-        }
-        for (int k = low; k <= high; k++){
-            if(i > mid){
-                array[k] = auk[j++];
-            }else if(j > high){
-                array[k] = auk[i++];
-            }else if(less(auk[j],auk[i])){
-                array[k] = auk[j++];
-            }else {
-                array[k] = auk[i++];
-            }
-        }
+    /**
+     *
+     * @param array
+     */
+    public static void sort(Comparable[] array) {
+        auk = new Comparable[array.length];
+        sort(array, 0, array.length - 1);
     }
 
-    public static void sort(Comparable[] array) {
-
+    /**
+     * 自顶向下的归并排序
+     * @param array
+     * @param low
+     * @param high
+     */
+    private static void sort(Comparable[] array, int low, int high){
+        if(high <= low){
+            return;
+        }
+        int mid = low + (high - low)/2;
+        sort(array, low, mid);  //左半边排序
+        sort(array, mid + 1, high);  //右半边排序
+        merge(array, low, mid, high); //归并
     }
 
     /**
@@ -71,13 +73,33 @@ public class MergeSort {
      * @return
      */
     private static boolean isSorted(Comparable[] array) {
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 1; i < array.length; i++) {
             if (less(array[i], array[i - 1])) {
                 return false;
             }
         }
         return true;
     }
+
+    public static void merge(Comparable[] array, int low, int mid, int high){
+        int i = low;
+        int j = mid + 1;
+        for (int k = low; k <= high; k++){
+            auk[k] = array[k];
+        }
+        for (int k = low; k <= high; k++){
+            if(i > mid){
+                array[k] = auk[j++];
+            }else if(j > high){
+                array[k] = auk[i++];
+            }else if(less(auk[j],auk[i])){
+                array[k] = auk[j++];
+            }else {
+                array[k] = auk[i++];
+            }
+        }
+    }
+
 
     public static void main(String args[]) {
         String[] array = {"abc", "cca", "acd", "bfg", "aaa"};
