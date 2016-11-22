@@ -1,4 +1,9 @@
-package com.data.structure.stack;
+package com.data.structure;
+
+import com.data.structure.quene.LinkListQuene;
+import com.data.structure.stack.ArrayStack;
+import com.data.structure.stack.FixArrayStackOfStrings;
+import com.data.structure.stack.LinkListStack;
 
 /**
  * Author: zhouy

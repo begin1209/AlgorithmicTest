@@ -1,4 +1,4 @@
-package com.data.structure.stack;
+package com.data.structure.quene;
 
 import java.util.Iterator;
 
